@@ -1,0 +1,32 @@
+[tool.pyright]
+venvPath = "/home/cirec/.cache/pypoetry/virtualenvs/"
+venv = "digest-dub-thpHjbCl-py3.12"
+
+[tool.poetry]
+packages = [{include = "app"}]
+name = "digest-dub"
+version = "0.1.0"
+description = ""
+authors = ["Ci-re <cirecleen@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+tensorflow-recommenders = "0.7.2"
+tensorflow = "^2.17.0"
+pandas = "^2.2.3"
+numpy = "^1.26.0"
+sqlalchemy = "^2.0.35"
+psycopg2 = "^2.9.9"
+fastapi = { extras = ["standard"], version = "^0.115.0" }
+scikit-learn = "^1.5.2"
+openai = "^1.51.0"
+google-generativeai = "^0.8.2"
+ipykernel = "^6.29.5"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
