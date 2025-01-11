@@ -25,12 +25,12 @@ def insert_data(data: List[Dict], schema: str) -> None:
 
 # TODO Rename this here and in `insert_data`
 def _extracted_from_insert_data_6(conn, _table, data):
-    conn.execute(text("SET session_replication_role = 'replica';"))
+    # conn.execute(text("SET session_replication_role = 'replica';"))
     conn.execute(
         _table.insert(),
         data
     )
-    conn.execute(text("SET session_replication_role = 'origin';"))
+    # conn.execute(text("SET session_replication_role = 'origin';"))
     conn.commit()
     session.close()
     logger.info("PUSHED TO THE DATABASE")

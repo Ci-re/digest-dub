@@ -6,12 +6,13 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.gitignore
 # C extensions
 *.so
 database.ini
 # Distribution / packaging
 data/
+weights/
 .Python
 build/
 develop-eggs/
