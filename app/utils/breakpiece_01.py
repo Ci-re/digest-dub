@@ -21,6 +21,7 @@ class Recipe(typing.TypedDict):
 data = pd.read_json("../../app/data/processed/ingredients.json")
 ingredient_list = data["ingredient"]
 ingredients_id = data["recipe_id"]
+
 # print(ingredient_list[2416:])
 # count = 0
 # for ing in ingredient_list:
@@ -33,7 +34,7 @@ put in a proper JSON format. Don't worry, this is not a difficult task, However,
 must output only a single dictionary or single JSON object like this  {main_ingredient : "peanut", "quantity" : "2.5", "measurement": "cups",
 "alternative_ingredient": "groundnut", "weight": "5kcal"} and in situations where you can't find a specific property or feature, return an empty
 string for that attribute. I also noticed you are not good at identifying floating points values in texts. Please understand the 2.4 is
-different from 24, and also 1.5 is different from 15, becareful to identify the difference to avoid wrong data
+different from 24, and also 1.5 is different from 15, be careful to identify the difference to avoid wrong data
 '''
 def structure_ingredients():
     for ingredients, ingredient_id in zip(ingredient_list, ingredients_id):
@@ -97,5 +98,5 @@ def structure_measurements():
                 raise e
         time.sleep(4)
 
-if __name__ == "__main__":
-    structure_measurements()
+# if __name__ == "__main__":
+#     structure_measurements()
