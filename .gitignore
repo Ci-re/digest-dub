@@ -127,6 +127,10 @@ celerybeat.pid
 
 # Environments
 .env
+.env.dev
+.env.test
+neo4j_auth.txt
+neo4j/
 .venv
 env/
 venv/

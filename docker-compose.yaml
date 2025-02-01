@@ -1,0 +1,30 @@
+services:
+  neo4j:
+    image: neo4j:latest
+    volumes:
+        - ./neo4j/logs:/logs
+        - ./neo4j/config:/config
+        - ./neo4j/data:/data
+        - ./neo4j/plugins:/plugins
+    environment:
+        - NEO4J_AUTH_FILE=/run/secrets/neo4j_auth_file
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
+    secrets:
+      - neo4j_auth_file
+  
+  python-app:
+    build: .
+    depends_on:
+      - neo4j
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./db_load:/db_load  # Mounts only the db_load folder
+    working_dir: /db_load
+
+secrets:
+  neo4j_auth_file:
+    file: ./neo4j_auth.txt

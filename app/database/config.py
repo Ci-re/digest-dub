@@ -1,27 +1,26 @@
-from configparser import ConfigParser
-from typing import Dict, Optional, Any
-from pathlib import Path
 
-def get_absolute_path() -> str:
-    base_dir = Path('../../database.ini')
-    return str(base_dir)
+from neo4j import GraphDatabase
+from dotenv import load_dotenv
+from neo4j import GraphDatabase
+import os
 
-def load_config(filename: str=get_absolute_path(), section: str='postgresql') -> Dict[str, Any]:
-    '''
-        filename : Gets the absolute path of the database.ini file
-        section: The section of the file we intend to
-    '''
-    parser: ConfigParser = ConfigParser()
-    try:
-        with open(filename) as file:
-            parser.read_file(file)
-    except Exception as e:
-        print(f'X unable to read file ==> {e}')
-    config: Optional[Dict] = {}
-    if parser.has_section(section):
-        params = parser.items(section)
-        for param in params:
-            config[param[0]] = param[1]
-    else:
-        raise Exception(f"Section {section} not found in the {filename}")
-    return config
+load_dotenv(os.getenv("../../.env.dev"))
+
+username = os.environ["NEO4J__USERNAME"]
+password = os.environ["NEO4J__PASSWORD"]
+
+PATH = "../../"
+
+URI = "http://localhost:7474/"
+driver = GraphDatabase.driver(uri=URI, auth=(username, password))
+
+def index_graph_db_from_postgres():
+    with driver.session() as session:
+        with open("../../queries_to_load_db.cypher", "r") as cypher_file:
+            cypher_query = cypher_file.read()
+            result = session.run(query=cypher_query)
+            for record in result:
+                print(record)
+            
+    
+

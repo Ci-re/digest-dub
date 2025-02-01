@@ -10,6 +10,10 @@ description = ""
 authors = ["Ci-re <cirecleen@gmail.com>"]
 readme = "README.md"
 
+[tool.poetry.plugins.dotenv]
+ignore = "false"
+location = ".env.dev"
+
 [tool.poetry.dependencies]
 python = "^3.12"
 tensorflow-recommenders = "0.7.2"
@@ -23,6 +27,9 @@ scikit-learn = "^1.5.2"
 openai = "^1.51.0"
 google-generativeai = "^0.8.2"
 ipykernel = "^6.29.5"
+jupyter = "^1.1.1"
+poetry-dotenv = "^0.4.0"
+neo4j = "^5.27.0"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.1.1"

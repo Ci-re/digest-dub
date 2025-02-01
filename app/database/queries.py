@@ -12,7 +12,7 @@ session = Session()
 
 # Reflect existing tables
 metadata = MetaData()
-metadata.reflect(bind=CONN)
+metadata.reflect(bind=CONN) 
 
 def insert_data(data: List[Dict], schema: str) -> None:
     _table = metadata.tables[schema]
