@@ -24,8 +24,7 @@ JDBC_URL = f"jdbc:postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_N
 
 driver = AsyncGraphDatabase.driver(uri=url, auth=AUTH)
 
-
-async def create_data(q):
+async def create_data(q) -> None:
     async def create_node_and_relationships(tx, queries: List[str], params: dict):    
         for query in queries:
             await tx.run(query, **params)
@@ -37,10 +36,15 @@ async def create_data(q):
             }
             await session.execute_write(create_node_and_relationships, q, params)
 
-async def index_data():
-    
+async def index_data() -> None:
+    async with AsyncGraphDatabase.driver(uri=url, auth=AUTH) as driver:
+        async with driver.session() as session:
+            for query in index_queries():
+                await session.run(query)
 
 if __name__ == "__main__":
     asyncio.run(create_data(q=queries_to_add_nodes))
+    time.sleep(3)
+    asyncio.run(index_data())
     time.sleep(3)
     asyncio.run(create_data(q=queries_to_add_relationships))
